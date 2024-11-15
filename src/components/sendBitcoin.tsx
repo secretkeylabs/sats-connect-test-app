@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Capability } from "sats-connect";
-import {
+import Wallet, {
   BitcoinNetworkType,
   RpcErrorCode,
   request,
@@ -41,7 +41,7 @@ const SendBitcoin = ({ network, address, capabilities }: Props) => {
 
   const onSendBtcRpc = async () => {
     try {
-      const response = await request("sendTransfer", {
+      const response = await Wallet.request("sendTransfer", {
         recipients: [
           {
             address: recipient,

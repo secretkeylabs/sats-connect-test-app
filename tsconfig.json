@@ -3,6 +3,7 @@
     "target": "ES2022",
     "module": "commonjs",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
     "rootDir": "src",

@@ -106,5 +106,6 @@ export const createPSBT = async (
 
   const psbt = tx.toPSBT(0);
   const psbtB64 = base64.encode(psbt);
+  console.log(psbtB64);
   return psbtB64;
 };
