@@ -30,6 +30,8 @@ import "./App.css";
 import CreateRepeatInscriptions from "./components/createRepeatInscriptions";
 import SignBulkTransaction from "./components/signBulkTransaction";
 import GetRunesBalance from "./components/getRuneBalance";
+import Airdrop from "./components/stacks/airdrop";
+import { AppConfig, showConnect, UserSession } from "@stacks/connect";
 
 function App() {
   const [paymentAddress, setPaymentAddress] = useLocalStorage("paymentAddress");
@@ -220,6 +222,26 @@ function App() {
   //   );
   // }
 
+  const handleConnectStacks = async () => {
+    const appConfig = new AppConfig(['store_write', 'publish_data']);
+    const userSession = new UserSession({ appConfig });
+    const appDetails = {
+      name: "Sats Connect Test App",
+      icon: "",
+     }
+     
+     showConnect({
+      appDetails,
+      userSession,
+      onFinish: () => {
+        window.location.reload();
+      },
+      onCancel: () => {
+        console.log('oops');
+      },
+     });
+   };
+
   if (!isReady) {
     return (
       <div style={{ padding: 30 }}>
@@ -240,6 +262,13 @@ function App() {
           >
             Connect Account
           </button>
+          <button
+            style={{ height: 30, width: 180, marginLeft: 10 }}
+            onClick={handleConnectStacks}
+          >
+            Connect Stacks
+          </button>
+          <Airdrop network={network} />
         </div>
       </div>
     );
@@ -310,7 +339,7 @@ function App() {
             <p>Stacks Address: {stacksAddress}</p>
             <p>Stacks PubKey: {stacksPublicKey}</p>
             <br />
-
+            <Airdrop network={network} />
             <StxGetAccounts />
 
             <StxGetAddresses />
